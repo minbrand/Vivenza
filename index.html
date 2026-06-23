@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivenza Terra Brasilis | Sinta a vida acontecer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracota:#b6522f;
+    --terracota-dark:#8f3f24;
+    --terracota-light:#d97a4f;
+    --teal:#bfe8e2;
+    --teal-dark:#6fb3aa;
+    --cream:#fbf6f0;
+    --brown:#4a342a;
+    --text:#3a2a22;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Poppins',sans-serif;color:var(--text);background:var(--cream);line-height:1.6;overflow-x:hidden;}
+  h1,h2,h3,.logo{font-family:'Quicksand',sans-serif;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(251,246,240,0.0);transition:background .35s, box-shadow .35s;}
+  header.scrolled{background:rgba(251,246,240,0.97);box-shadow:0 4px 18px rgba(0,0,0,.08);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1180px;margin:0 auto;}
+  .logo{font-size:26px;font-weight:700;color:#fff;letter-spacing:.5px;transition:color .35s;}
+  header.scrolled .logo{color:var(--terracota);}
+  .logo span{display:block;font-size:9px;letter-spacing:3px;font-weight:500;font-family:'Poppins';}
+  .nav-links{display:flex;gap:30px;list-style:none;}
+  .nav-links a{color:#fff;font-size:14px;font-weight:500;letter-spacing:.4px;transition:color .35s,opacity .2s;}
+  header.scrolled .nav-links a{color:var(--brown);}
+  .nav-links a:hover{opacity:.7;}
+  .nav-cta{background:var(--terracota);color:#fff !important;padding:10px 22px;border-radius:30px;font-size:13px;font-weight:600;white-space:nowrap;}
+  .burger{display:none;background:none;border:none;font-size:26px;color:#fff;cursor:pointer;}
+  header.scrolled .burger{color:var(--terracota);}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(circle at 50% 20%, #2f4f49 0%, #16241f 55%, #0e1a16 100%);padding:130px 20px 70px;}
+  .hero-bg{position:absolute;inset:0;background-image:url('images/hero-lancamento.jpg');background-size:cover;background-position:center 18%;filter:blur(28px) brightness(.55) saturate(1.1);transform:scale(1.15);z-index:0;}
+  .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,18,15,.35) 0%, rgba(10,18,15,.15) 35%, rgba(8,14,12,.75) 100%);z-index:1;}
+  .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:26px;}
+  .hero-content .poster{max-width:min(420px,86vw);width:100%;border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  .hero-content .btn-primary{font-size:14px;}
+  .scroll-down{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:2;color:#fff;font-size:12px;letter-spacing:2px;opacity:.85;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .scroll-down .arrow{width:18px;height:18px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);animation:bounce 1.8s infinite;}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translate(0,0);}50%{transform:rotate(45deg) translate(5px,5px);}}
+  @media (max-width:560px){.hero{padding:110px 16px 60px;}}
+
+  section{padding:90px 0;}
+  .section-label{color:var(--terracota);font-weight:600;letter-spacing:3px;text-transform:uppercase;font-size:13px;margin-bottom:10px;display:block;}
+  .section-title{font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--brown);margin-bottom:18px;}
+  .section-text{font-size:16px;color:#5a4a40;max-width:640px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* SOBRE */
+  .about{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+  .about img{border-radius:14px;box-shadow:0 20px 50px rgba(80,40,20,.18);}
+  .about .text-block strong{color:var(--terracota-dark);}
+
+  /* STATS */
+  .stats-section{background:var(--terracota);color:#fff;position:relative;}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:50px;text-align:center;}
+  .stat-card .num{font-size:clamp(34px,5vw,52px);font-weight:700;font-family:'Quicksand';}
+  .stat-card .label{font-size:13px;letter-spacing:1px;opacity:.9;margin-top:6px;}
+  .stats-section .section-title, .stats-section .section-label{color:#fff;}
+  .stats-section .section-text{color:rgba(255,255,255,.85);}
+
+  /* IMAGE BANNER */
+  .banner{position:relative;height:520px;overflow:hidden;}
+  .banner img{width:100%;height:100%;object-fit:cover;}
+  .banner .caption{position:absolute;left:0;bottom:0;padding:40px;background:linear-gradient(180deg, transparent, rgba(20,10,5,.75));color:#fff;width:100%;}
+  .banner .caption h3{font-size:clamp(20px,3vw,30px);font-weight:600;max-width:560px;}
+
+  /* GRID 2 COL FEATURE */
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;}
+  .feature img{width:100%;height:100%;object-fit:cover;}
+  .feature .pad{padding:60px;display:flex;flex-direction:column;justify-content:center;background:#fff;}
+  .feature.reverse{direction:rtl;}
+  .feature.reverse .pad{direction:ltr;}
+  .feature-list{margin-top:24px;list-style:none;}
+  .feature-list li{padding:10px 0 10px 28px;position:relative;border-bottom:1px solid #eee3d8;font-size:15px;color:#5a4a40;}
+  .feature-list li::before{content:'✦';color:var(--terracota);position:absolute;left:0;top:9px;font-size:13px;}
+
+  /* LOCALIZACAO */
+  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  .loc-list{list-style:none;margin-top:20px;}
+  .loc-list li{display:flex;gap:14px;align-items:flex-start;padding:11px 0;font-size:14.5px;color:#5a4a40;border-bottom:1px dashed #e3d4c4;}
+  .loc-list li .pin{flex:0 0 24px;height:24px;border-radius:50%;background:var(--teal);color:var(--terracota-dark);font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .loc-grid img{border-radius:14px;box-shadow:0 20px 50px rgba(80,40,20,.18);}
+
+  /* AMENIDADES GALLERY */
+  .gallery-section{background:#fff;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .tag{background:var(--teal);color:var(--terracota-dark);padding:7px 16px;border-radius:30px;font-size:13px;font-weight:600;}
+  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px;}
+  .photo-grid figure{border-radius:14px;overflow:hidden;position:relative;box-shadow:0 14px 30px rgba(80,40,20,.12);}
+  .photo-grid img{height:280px;object-fit:cover;transition:transform .5s;}
+  .photo-grid figure:hover img{transform:scale(1.06);}
+  .photo-grid figcaption{position:absolute;bottom:0;left:0;width:100%;padding:16px;background:linear-gradient(180deg,transparent,rgba(20,10,5,.8));color:#fff;font-size:14px;font-weight:600;}
+
+  /* QUOTE BLOCK */
+  .quote-block{background:var(--brown);color:#f5ece2;padding:70px 0;text-align:center;}
+  .quote-block blockquote{font-size:clamp(18px,2.4vw,26px);font-weight:300;max-width:780px;margin:0 auto 20px;font-style:italic;line-height:1.5;}
+  .quote-block cite{font-size:14px;letter-spacing:1px;opacity:.8;font-style:normal;}
+
+  /* SUSTENTABILIDADE */
+  .eco{background:var(--teal);}
+  .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;}
+  .eco-grid .card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 30px rgba(80,40,20,.1);}
+  .eco-grid .card img{height:200px;object-fit:cover;}
+  .eco-grid .card .card-text{padding:18px 20px;font-size:14px;color:#5a4a40;font-weight:500;}
+
+  /* FICHA TECNICA */
+  .ficha{background:#fff;}
+  .ficha-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:40px;}
+  .ficha-card{border:1px solid #ecdfd2;border-radius:14px;padding:26px 22px;}
+  .ficha-card h4{color:var(--terracota);font-size:14px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+  .ficha-card ul{list-style:none;font-size:14px;color:#5a4a40;}
+  .ficha-card li{padding:5px 0;border-bottom:1px solid #f3e9dd;}
+  .ficha-card li b{color:var(--brown);}
+
+  /* IMPLANTACAO */
+  .plan-section{background:var(--cream);}
+  .plan-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;}
+  .plan-wrap img{border-radius:14px;box-shadow:0 20px 50px rgba(80,40,20,.15);}
+
+  /* CTA / CONTATO */
+  .cta-section{position:relative;padding:110px 0;text-align:center;color:#fff;overflow:hidden;}
+  .cta-section img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .cta-section::after{content:'';position:absolute;inset:0;background:rgba(60,25,12,.72);z-index:1;}
+  .cta-content{position:relative;z-index:2;max-width:560px;margin:0 auto;}
+  .cta-content h2{font-size:clamp(28px,4vw,40px);margin-bottom:16px;}
+  .cta-content p{opacity:.9;margin-bottom:34px;}
+  .btn-primary{display:inline-block;background:var(--terracota);padding:16px 38px;border-radius:30px;font-weight:600;font-size:15px;letter-spacing:.5px;transition:background .25s, transform .25s;}
+  .btn-primary:hover{background:var(--terracota-light);transform:translateY(-2px);}
+
+  footer{background:var(--brown);color:#d9c9bb;padding:50px 0 24px;text-align:center;}
+  footer img{max-width:160px;margin:0 auto 20px;filter:brightness(1.4);}
+  .footer-links{display:flex;justify-content:center;gap:24px;margin:18px 0;font-size:14px;flex-wrap:wrap;}
+  footer .copy{font-size:12px;opacity:.6;margin-top:18px;}
+
+  @media (max-width:900px){
+    .about,.feature,.loc-grid,.plan-wrap{grid-template-columns:1fr;}
+    .feature{direction:ltr;}
+    .feature img{height:320px;}
+    .feature .pad{padding:40px 28px;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .photo-grid{grid-template-columns:1fr 1fr;}
+    .eco-grid{grid-template-columns:1fr;}
+    .ficha-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:block;}
+  }
+  @media (max-width:560px){
+    .photo-grid{grid-template-columns:1fr;}
+    .ficha-grid{grid-template-columns:1fr;}
+    section{padding:60px 0;}
+  }
+
+  .nav-links.open{
+    display:flex;position:absolute;top:64px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;gap:18px;box-shadow:0 10px 20px rgba(0,0,0,.08);
+  }
+  .nav-links.open a{color:var(--brown) !important;}
+
+  /* FLOATING BUTTONS */
+  .float-stack{position:fixed;right:22px;bottom:22px;z-index:1200;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
+  .whatsapp-float{display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.25);transition:transform .25s, width .25s, border-radius .25s, padding .25s;overflow:hidden;white-space:nowrap;}
+  .whatsapp-float svg{width:28px;height:28px;flex:0 0 28px;}
+  .whatsapp-float span{font-size:14px;font-weight:600;opacity:0;max-width:0;transition:opacity .25s, max-width .25s;}
+  .whatsapp-float:hover{width:200px;border-radius:30px;padding:0 18px;transform:translateY(-2px);}
+  .whatsapp-float:hover span{opacity:1;max-width:160px;}
+  .atendimento-float{display:flex;align-items:center;gap:8px;background:var(--terracota);color:#fff;padding:14px 22px;border-radius:30px;font-size:14px;font-weight:600;box-shadow:0 8px 22px rgba(0,0,0,.22);transition:background .25s, transform .25s;animation:pulse-att 2.6s infinite;}
+  .atendimento-float:hover{background:var(--terracota-light);transform:translateY(-2px);}
+  .atendimento-float svg{width:18px;height:18px;}
+  @keyframes pulse-att{0%,100%{box-shadow:0 8px 22px rgba(0,0,0,.22);}50%{box-shadow:0 8px 22px rgba(182,82,47,.55);}}
+  @media (max-width:560px){
+    .float-stack{right:14px;bottom:14px;}
+    .atendimento-float span.long{display:none;}
+    .whatsapp-float{width:50px;height:50px;}
+    .whatsapp-float svg{width:24px;height:24px;}
+  }
+
+  /* CONTACT FORM */
+  .contact-form{position:relative;z-index:2;background:rgba(255,255,255,.97);border-radius:18px;padding:36px 32px;margin-top:40px;text-align:left;box-shadow:0 20px 50px rgba(0,0,0,.25);color:var(--text);}
+  .contact-form h3{font-family:'Quicksand',sans-serif;font-size:20px;color:var(--brown);margin-bottom:18px;text-align:center;}
+  .contact-form .row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+  .contact-form .row .field{flex:1 1 200px;}
+  .contact-form label{display:block;font-size:12.5px;font-weight:600;color:var(--terracota-dark);margin-bottom:6px;letter-spacing:.3px;}
+  .contact-form input,.contact-form textarea{width:100%;padding:12px 14px;border:1px solid #e3d4c4;border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;background:#fbf6f0;color:var(--text);}
+  .contact-form input:focus,.contact-form textarea:focus{outline:2px solid var(--teal-dark);background:#fff;}
+  .contact-form textarea{resize:vertical;min-height:90px;}
+  .contact-form button{width:100%;background:var(--terracota);color:#fff;border:none;padding:14px;border-radius:30px;font-size:15px;font-weight:600;letter-spacing:.4px;cursor:pointer;transition:background .25s, transform .25s;margin-top:6px;}
+  .contact-form button:hover{background:var(--terracota-light);transform:translateY(-2px);}
+  .form-divider{display:flex;align-items:center;gap:12px;margin:26px 0 0;color:rgba(255,255,255,.7);font-size:13px;}
+  .form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.3);}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="logo">vivenza<span>TERRA BRASILIS</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre">O Empreendimento</a></li>
+      <li><a href="#localizacao">Localização</a></li>
+      <li><a href="#clubhouse">Clubhouse</a></li>
+      <li><a href="#lazer">Lazer</a></li>
+      <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+      <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+    </ul>
+    <button class="burger" id="burgerBtn">☰</button>
+  </nav>
+</header>
+
+<div class="float-stack">
+  <a class="atendimento-float" href="https://wa.link/nmk4mc" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v5l3 3"></path></svg>
+    <span class="long">Falar com atendimento agora</span>
+  </a>
+  <a class="whatsapp-float" href="https://wa.link/nmk4mc" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15.001c0 2.385.668 4.612 1.825 6.508L4 29l7.696-1.787a11.93 11.93 0 0 0 4.305.788C22.629 28 28 22.627 28 15.999 28 9.373 22.629 3 16.001 3zm0 21.6a9.56 9.56 0 0 1-4.87-1.34l-.349-.207-4.566 1.06 1.08-4.448-.228-.362A9.56 9.56 0 0 1 5.6 15.001C5.6 9.27 10.27 4.6 16.001 4.6c5.73 0 10.399 4.67 10.399 10.4 0 5.73-4.67 10.6-10.399 10.6zm5.55-7.78c-.303-.152-1.793-.885-2.07-.986-.278-.102-.48-.152-.682.152-.202.303-.78.985-.957 1.187-.176.202-.353.227-.655.076-.303-.151-1.277-.471-2.433-1.502-.9-.802-1.508-1.793-1.684-2.096-.176-.303-.019-.467.133-.62.151-.151.34-.394.51-.59.171-.198.227-.34.34-.566.114-.227.057-.42-.038-.572-.095-.151-.61-1.471-.836-2.012-.222-.534-.448-.462-.616-.47-.16-.008-.34-.01-.522-.01-.182 0-.478.069-.732.345-.253.276-.97.95-.97 2.317 0 1.368.997 2.69 1.135 2.876.139.187 1.92 2.934 4.66 3.997 2.74 1.063 2.74.708 3.234.663.493-.045 1.793-.733 2.05-1.441.255-.708.255-1.314.178-1.441-.076-.126-.278-.202-.581-.354z"></path></svg>
+  </a>
+</div>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <img class="poster" src="images/hero-lancamento.jpg" alt="Vivenza Terra Brasilis - Lançamento 27/06 - Lotes a partir de R$ 184.000,00">
+    <a href="#contato" class="btn-primary">Quero saber mais</a>
+  </div>
+  <div class="scroll-down"><span>role para descobrir</span><span class="arrow"></span></div>
+</section>
+
+<section id="sobre">
+  <div class="container about">
+    <img src="images/aerial-conceito.jpg" alt="Vista aérea Vivenza">
+    <div class="text-block">
+      <span class="section-label">O Empreendimento</span>
+      <h2 class="section-title">A Terra Brasilis reescreve o conceito de alto padrão em Maracanaú.</h2>
+      <p class="section-text">O som dos pássaros será o seu despertador e o café da manhã será banhado pela luz do sol. Enquanto as crianças correm, o tempo vai esquecer de passar. Aproveite pra ficar descalço e ponha o pé na grama — o vento que brinca nas árvores sussurra no seu ouvido: essa conquista é sua.</p>
+      <p class="section-text" style="margin-top:14px;">Janelas e portas vão se abrir. E quando você entrar, sorria: porque há momentos em que tudo encontra o seu lugar. Esse é o seu. Com toda a segurança, o conforto e a beleza que a vida preparou — só pra você.</p>
+      <p class="section-text" style="margin-top:14px;"><strong>Vivenza.</strong> O novo capítulo da Terra Brasilis. Você é o protagonista dessa história.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="container">
+    <span class="section-label">Em números</span>
+    <h2 class="section-title">Um destino residencial pensado em cada detalhe.</h2>
+    <p class="section-text">Área total do terreno de 247.010,88 m², projetada para oferecer lotes generosos e uma estrutura de clube completa, exclusiva para os moradores.</p>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="num">536</div><div class="label">LOTES RESIDENCIAIS</div></div>
+      <div class="stat-card"><div class="num">18</div><div class="label">LOTES COMERCIAIS</div></div>
+      <div class="stat-card"><div class="num">190-220</div><div class="label">M² POR LOTE</div></div>
+      <div class="stat-card"><div class="num">1.800</div><div class="label">M² DE CLUBHOUSE</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="banner">
+  <img src="images/aerial-perspectiva.jpg" alt="Início de um novo destino residencial">
+  <div class="caption"><h3>O início de um novo grande destino residencial da Terra Brasilis em Maracanaú.</h3></div>
+</div>
+
+<section id="localizacao">
+  <div class="container loc-grid">
+    <div>
+      <span class="section-label">Localização privilegiada</span>
+      <h2 class="section-title">Tudo o que sua família precisa, a poucos minutos de casa.</h2>
+      <ul class="loc-list">
+        <li><span class="pin">2</span> 2 minutos da Unifametro</li>
+        <li><span class="pin">3</span> 3 minutos do Açaí Home Center</li>
+        <li><span class="pin">5</span> 5 minutos dos Jardins da Serra</li>
+        <li><span class="pin">5</span> 5 minutos das Moradas do Terra</li>
+        <li><span class="pin">1</span> 1 minuto da Vista do Lago</li>
+        <li><span class="pin">5</span> 5 minutos da Academia Selfit</li>
+        <li><span class="pin">5</span> 5 minutos do Shopping Open Mall / Pátio Jardins da Serra</li>
+        <li><span class="pin">10</span> 10 minutos da Academia Smart Fit</li>
+        <li><span class="pin">10</span> 10 minutos de colégio particular</li>
+        <li><span class="pin">10</span> 10 minutos do pronto atendimento Unimed</li>
+        <li><span class="pin">12</span> 12 minutos do North Shopping Maracanaú</li>
+        <li><span class="pin">15</span> 15 minutos da Marapinga</li>
+      </ul>
+    </div>
+    <img src="images/mapa-localizacao.jpg" alt="Mapa de localização Vivenza">
+  </div>
+</section>
+
+<div class="feature">
+  <img src="images/portaria.jpg" alt="Portaria Vivenza">
+  <div class="pad">
+    <span class="section-label">Segurança e Acesso</span>
+    <h2 class="section-title">Toda a segurança, o conforto e a beleza que a vida preparou.</h2>
+    <ul class="feature-list">
+      <li>Portaria moderna com vigilância 24h e tranquilidade em cada instante</li>
+      <li>Acesso independente para moradores, visitantes e serviço</li>
+      <li>Empreendimento 100% fechado, com circuito de câmeras CFTV</li>
+      <li>Monitoramento 24h e sistema de alarme em todo o perímetro</li>
+      <li>Espaço delivery e acessos independentes para serviços</li>
+    </ul>
+  </div>
+</div>
+
+<section id="clubhouse" class="quote-block">
+  <div class="container">
+    <blockquote>"O projeto integra arquitetura e paisagem, conectando áreas comuns ao entorno natural, com espaços abertos, acolhedores e ventilados. A cobertura inspirada no voo dos jaçanãs e os elementos permeáveis reforçam um conjunto leve e harmônico entre arquitetura e natureza."</blockquote>
+    <cite>Marcus Novais, Lucas Novais e Renata Barreto — Novais Arquitetura</cite>
+  </div>
+</section>
+
+<div class="banner">
+  <img src="images/clubhouse-fachada-novais.jpg" alt="Fachada do clubhouse">
+  <div class="caption"><h3>Arquitetura, paisagismo, mobiliário, arte e urbanismo em perfeita sintonia com você.</h3></div>
+</div>
+
+<section class="gallery-section">
+  <div class="container">
+    <span class="section-label">Clubhouse · +1.800 m²</span>
+    <h2 class="section-title">Chegar em casa vai ser o melhor momento do seu dia.</h2>
+    <p class="section-text">Clubhouse integrado a um lago natural, com mais de 700 m² de espelho d'água, pier contemplativo e piscina de resort pensada como experiência — com raia semiolímpica de 25 metros e 150 m² de espelhos d'água.</p>
+    <div class="tag-row">
+      <span class="tag">Piscina adulta 455 m²</span>
+      <span class="tag">Pool lounge</span>
+      <span class="tag">Lounges submersos</span>
+      <span class="tag">Piscina infantil 60 m²</span>
+      <span class="tag">Deck gourmet</span>
+      <span class="tag">Pier contemplativo</span>
+    </div>
+    <div class="photo-grid">
+      <figure><img src="images/clubhouse-aerial.jpg" alt="Vista aérea clubhouse"><figcaption>Vista aérea do lago e clubhouse</figcaption></figure>
+      <figure><img src="images/lounge-caribe.jpg" alt="Lounge Caribe"><figcaption>Piscina com Lounge Caribe</figcaption></figure>
+      <figure><img src="images/planta-baixa.jpg" alt="Planta baixa clubhouse"><figcaption>Planta baixa do clubhouse</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="feature reverse" id="lazer">
+  <img src="images/piscina-infantil.jpg" alt="Piscina infantil com aquaplay">
+  <div class="pad">
+    <span class="section-label">Universo Infantil</span>
+    <h2 class="section-title">Enquanto as crianças correm, o tempo vai esquecer de passar.</h2>
+    <ul class="feature-list">
+      <li>Brinquedoteca equipada para todas as idades</li>
+      <li>Playground ao ar livre, integrado à paisagem</li>
+      <li>Piscina infantil com Aquaplay e tobogãs</li>
+      <li>Espaços pensados para toda a família, com segurança e diversão</li>
+    </ul>
+  </div>
+</div>
+
+<div class="feature">
+  <img src="images/espaco-bar.jpg" alt="Espaço bar e salão de festas">
+  <div class="pad">
+    <span class="section-label">Gastronomia · Curadoria DNX Hotelaria</span>
+    <h2 class="section-title">Espaços para reunir, celebrar e viver o melhor da vida.</h2>
+    <ul class="feature-list">
+      <li>Salão de festas para 65 pessoas, com bar e cozinha equipada</li>
+      <li>Espaço bar integrado às áreas externas</li>
+      <li>Curadoria de mobiliário assinada por DNX Hotelaria</li>
+      <li>Ambientes com vista para o lago e áreas verdes</li>
+    </ul>
+  </div>
+</div>
+
+<div class="feature reverse">
+  <img src="images/recovery-room.jpg" alt="Recovery room e academia">
+  <div class="pad">
+    <span class="section-label">Wellness</span>
+    <h2 class="section-title">Espaço wellness completo que transforma qualidade de vida em experiência.</h2>
+    <ul class="feature-list">
+      <li>Academia panorâmica de 157 m² com equipamentos profissionais</li>
+      <li>Recovery room de 20 m², com crioterapia de imersão</li>
+      <li>Eco sauna e maca para liberação miofascial</li>
+      <li>Barbearia integrada à estrutura wellness</li>
+    </ul>
+  </div>
+</div>
+
+<div class="banner">
+  <img src="images/arena-vivenza.jpg" alt="Arena Vivenza">
+  <div class="caption"><h3>Arena Vivenza — esporte e lazer com padrão profissional.</h3></div>
+</div>
+
+<section class="gallery-section">
+  <div class="container">
+    <span class="section-label">Arena Vivenza</span>
+    <h2 class="section-title">Uma estrutura de resort para o esporte e o lazer.</h2>
+    <div class="tag-row">
+      <span class="tag">Campo de futebol society</span>
+      <span class="tag">Quadra de tênis de saibro</span>
+      <span class="tag">Quadras de beach tennis</span>
+      <span class="tag">Quadra poliesportiva</span>
+      <span class="tag">Espaço futmesa</span>
+      <span class="tag">Tênis de mesa</span>
+      <span class="tag">Espirrobol</span>
+      <span class="tag">Playground</span>
+      <span class="tag">Quiosque gourmet com churrasqueira</span>
+    </div>
+    <div class="photo-grid">
+      <figure><img src="images/campo-quadras.jpg" alt="Quadras esportivas"><figcaption>Quadras e campo society</figcaption></figure>
+      <figure><img src="images/bosque-descobertas.jpg" alt="Bosque das Descobertas"><figcaption>Bosque das Descobertas</figcaption></figure>
+      <figure><img src="images/praca-boasvindas.jpg" alt="Praça de Boas-vindas"><figcaption>Praça de Boas-vindas</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="eco" id="sustentabilidade">
+  <div class="container">
+    <span class="section-label">Sustentável por natureza</span>
+    <h2 class="section-title">Mais do que reduzir impactos, construir em equilíbrio com o que já existe.</h2>
+    <p class="section-text">Na Terra Brasilis, sustentabilidade não é compromisso, é nosso jeito de fazer. Estação de tratamento de água que trata e reaproveita recursos dentro do próprio empreendimento, preservação de árvores nativas com transplante na vegetação do dia a dia, e ETE com reúso da água na irrigação.</p>
+    <div class="eco-grid">
+      <div class="card"><img src="images/sustentavel.jpg" alt="Sustentabilidade"><div class="card-text">Preservação da vegetação nativa e reúso de água em todo o paisagismo.</div></div>
+      <div class="card"><img src="images/agua-irrigacao.jpg" alt="ETE e reúso de água"><div class="card-text">ETE com reúso da água na irrigação e transplante de árvores nativas.</div></div>
+      <div class="card"><img src="images/numeros-lotes.jpg" alt="Horta e pomar comunitário"><div class="card-text">Horta e pomar comunitário integrados às áreas verdes do condomínio.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="plan-section">
+  <div class="container plan-wrap">
+    <img src="images/implantacao-legenda.jpg" alt="Implantação Vivenza">
+    <div>
+      <span class="section-label">Implantação</span>
+      <h2 class="section-title">Um projeto urbanístico pensado para o pleno crescimento.</h2>
+      <p class="section-text">Boulevard de acesso, áreas comuns integradas e lotes que variam de 190 m² a 220 m², distribuídos em quadras arborizadas com calçadas, ciclofaixas e estacionamentos para visitantes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ficha">
+  <div class="container">
+    <span class="section-label">Ficha Técnica</span>
+    <h2 class="section-title">Vivenza Terra Brasilis em detalhes.</h2>
+    <div class="ficha-grid">
+      <div class="ficha-card">
+        <h4>Terreno</h4>
+        <ul>
+          <li>Área total: <b>247.010,88 m²</b></li>
+          <li>Lotes residenciais: <b>536</b></li>
+          <li>Lotes comerciais: <b>18</b></li>
+          <li>Metragem dos lotes: <b>190 a 220 m²</b></li>
+        </ul>
+      </div>
+      <div class="ficha-card">
+        <h4>Clubhouse</h4>
+        <ul>
+          <li>Área construída: <b>~1.800 m²</b></li>
+          <li>Piscina adulta: <b>455 m²</b></li>
+          <li>Piscina infantil: <b>60 m²</b></li>
+          <li>Espelho d'água: <b>+700 m²</b></li>
+        </ul>
+      </div>
+      <div class="ficha-card">
+        <h4>Projetistas</h4>
+        <ul>
+          <li>Urbanismo: <b>Austin Urbanismo</b></li>
+          <li>Arquitetura: <b>Novais Arquitetura</b></li>
+          <li>Interiores: <b>Novais Arquitetura</b></li>
+          <li>Paisagismo: <b>Thiago Borges</b></li>
+        </ul>
+      </div>
+      <div class="ficha-card">
+        <h4>Arena Vivenza</h4>
+        <ul>
+          <li>Campo futebol society</li>
+          <li>Quadra de saibro e beach tennis</li>
+          <li>Quadra poliesportiva</li>
+          <li>Playground e quiosque gourmet</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contato">
+  <img src="images/footer-logo.jpg" alt="Vivenza Terra Brasilis">
+  <div class="cta-content" style="max-width:560px;">
+    <h2>Essa conquista é sua.</h2>
+    <p>Preencha o formulário e um consultor entra em contato pra te apresentar o Vivenza Terra Brasilis.</p>
+
+    <form class="contact-form" action="https://formsubmit.co/corretor.matheus.sg@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Novo contato - Site Vivenza Terra Brasilis">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="true">
+      <h3>Quero saber mais</h3>
+      <div class="row">
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="Nome" placeholder="Seu nome" required>
+        </div>
+        <div class="field">
+          <label for="telefone">Telefone / WhatsApp</label>
+          <input type="tel" id="telefone" name="Telefone" placeholder="(85) 9 9999-9999" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field" style="flex:1 1 100%;">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="E-mail" placeholder="seu@email.com" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field" style="flex:1 1 100%;">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="Mensagem" placeholder="Tenho interesse no Vivenza Terra Brasilis..."></textarea>
+        </div>
+      </div>
+      <button type="submit">Quero saber mais</button>
+    </form>
+
+    <div class="form-divider">ou fale direto pelo WhatsApp</div>
+    <a href="https://wa.link/nmk4mc" target="_blank" rel="noopener" class="btn-primary" style="margin-top:18px;">Falar no WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://www.vivenzaterrabrasilis.com.br" target="_blank" rel="noopener">www.vivenzaterrabrasilis.com.br</a>
+      <a href="https://www.instagram.com/terrabrasilisnordeste" target="_blank" rel="noopener">@terrabrasilisnordeste</a>
+      <a href="#top">Voltar ao topo</a>
+    </div>
+    <p class="copy">Administrado pela Nordeste Empreendimentos</p>
+    <p class="copy">© Terra Brasilis. Imagens e perspectivas meramente ilustrativas. Sujeitas a alterações sem aviso prévio.</p>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
